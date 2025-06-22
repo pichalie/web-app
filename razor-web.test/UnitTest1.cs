@@ -5,7 +5,8 @@ namespace razor_web.test
         [Fact]
         public void Test1()
         {
-            return false;
+            bool result = true;
+            Assert.False(result, "1 should not be prime");
         }
     }
 }
