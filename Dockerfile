@@ -20,7 +20,7 @@ WORKDIR "/src/razor-web"
 RUN dotnet build "./razor-web.csproj" -c $BUILD_CONFIGURATION -o /app/build
 
 WORKDIR "/src/razor-web.test"
-RUN dotnet test "./razor-web.test.csproj"
+RUN dotnet test "./razor-web.test.csproj" 
 WORKDIR "/src/razor-web"
 
 # This stage is used to publish the service project to be copied to the final stage
