@@ -12,10 +12,16 @@ FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 ARG BUILD_CONFIGURATION=Release
 WORKDIR /src
 COPY ["razor-web/razor-web.csproj", "razor-web/"]
+COPY ["razor-web.test/razor-web.test.csproj", "razor-web.test/"]
+
 RUN dotnet restore "razor-web/razor-web.csproj"
 COPY . .
 WORKDIR "/src/razor-web"
 RUN dotnet build "./razor-web.csproj" -c $BUILD_CONFIGURATION -o /app/build
+
+WORKDIR "/src/razor-web.test"
+RUN dotnet test "./razor-web.test.csproj"
+WORKDIR "/src/razor-web"
 
 # This stage is used to publish the service project to be copied to the final stage
 FROM build AS publish
